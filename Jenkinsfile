@@ -27,13 +27,13 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "scp -i /home/coditasadmin/jenkins/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/usr/share/apache-tomcat-7.0.94/webapps"
+                        sh "scp -i /home/coditasadmin/jenkins/tomcat-demo.pem -o StrictHostKeyChecking=no **/target/*.war ec2-user@${params.tomcat_dev}:/usr/share/apache-tomcat-7.0.94/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "scp -i /home/coditasadmin/jenkins/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/usr/share/apache-tomcat-7.0.94tomcat/webapps"
+                        sh "scp -i /home/coditasadmin/jenkins/tomcat-demo.pem -o StrictHostKeyChecking=no **/target/*.war ec2-user@${params.tomcat_prod}:/usr/share/apache-tomcat-7.0.94/webapps"
                     }
                 }
             }
